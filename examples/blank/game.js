@@ -15,5 +15,18 @@ define(function(require) {
     Player.create().tag("hhh");
     Player.create().tag("salut");
 
+    Player.on(["test", "test"], function() {
+        console.log("test");
+    });
+
+    Player.on(["hello", "test"], function() {
+        console.log("hello");
+    });
+
+    Player.emit(["test", "hello", "test"]);
+    game.on("start", function() {
+        // scenesController.emit("render", "loading");
+    });
+
     return game;
 });
