@@ -1,7 +1,6 @@
 define(function(require) {
 
     var eventCapabilities = require("burst/core/event_capabilities");
-    var objectUtils = require("burst/core/utils/object_utils");
 
     return function(collection) {
 
