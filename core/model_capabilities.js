@@ -39,6 +39,21 @@ define(function(require) {
             collections.forEach(function(collection) {
                 collection.add(model);
             });
+
+            model.tag = function(tagName) {
+                collections.forEach(function(collection) {
+                    collection.tag(tagName, model);
+                });
+                return model;
+            };
+
+            model.untag = function(tagName) {
+                collections.forEach(function(collection) {
+                    collection.untag(tagName, model);
+                });
+                return model;
+            };
+
             Model.emit.apply(Model, ["instance created", model].concat(arguments));
 
             return model;
@@ -46,10 +61,15 @@ define(function(require) {
 
         Model.bindCollection = function(collection) {
             collections.push(collection);
+            return Model;
         };
 
         Model.removeCollection = function(collection) {
-            collections.splice(collections.indexOf(collection), 1);
+            var index = collections.indexOf(collection);
+            if (index !== -1) {
+                collections.splice(index, 1);
+            }
+            return Model;
         };
 
         return Model;

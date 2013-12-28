@@ -3,15 +3,18 @@ define(function(require) {
     var Player = require("models/player");
     var entities = require("collections/entities");
 
-    var player = Player.create({
-        hello: "world"
-    });
-    console.log(player);
-    console.log(entities);
-    // playersCollection.add(player);
-    // console.log(playersCollection.all);
-    // playersCollection.remove(player);
-    // console.log(playersCollection.all);
+    Player.create().tag("hhh").tag("aaa").tag("zzz");
+    Player.create().tag("aaa");
+    Player.create().tag("hhh");
+    Player.create().tag("hhh");
+    Player.create().tag("hhh");
+    Player.create().tag("zzz");
+    Player.create().tag("hhh");
+    Player.create().tag("aaa");
+    Player.create().tag("hhh");
+    Player.create().tag("hhh");
+
+    console.log(entities.hhh.aaa.hhh.zzz);
 
     return game;
 });
