@@ -5,12 +5,13 @@ define(function(require) {
     return function(Model) {
 
         var index = 0;
-        var collection = {};
+        var models = {};
+        var collections = [];
 
         eventCapabilities(Model);
 
         Object.defineProperty(Model, "all", {
-            value: collection,
+            value: models,
             writable: false,
             enumerable: true
         });
@@ -22,19 +23,33 @@ define(function(require) {
         Model.create = function() {
             var model = eventCapabilities({});
             model.identifier = index;
-            collection[model.identifier] = model;
+            models[model.identifier] = model;
             index += 1;
 
             Object.defineProperty(model, "destroy", {
                 get: function() {
+                    collections.forEach(function(collection) {
+                        collection.remove(model);
+                    });
                     delete collection[model.identifier];
-                    BurstModel.emit("instance destroyed", model);
+                    Model.emit("instance destroyed", model);
                 }
             });
 
+            collections.forEach(function(collection) {
+                collection.add(model);
+            });
             Model.emit.apply(Model, ["instance created", model].concat(arguments));
 
             return model;
+        };
+
+        Model.bindCollection = function(collection) {
+            collections.push(collection);
+        };
+
+        Model.removeCollection = function(collection) {
+            collections.splice(collections.indexOf(collection), 1);
         };
 
         return Model;

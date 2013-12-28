@@ -1,12 +1,20 @@
 define(function(require) {
 
     var eventCapabilities = require("burst/core/event_capabilities");
-    var objectUtils = require("jburst/core/utils/object_utils");
-    var ArrayPrototype = objectUtils.clone(Array.prototype);
+    var objectUtils = require("burst/core/utils/object_utils");
 
     return function(collection) {
 
-        var flattened = Object.create(ArrayPrototype);
+        var flattened = Object.create(Array.prototype, {
+            add: {}
+        });
+        var tags = {};
+
+        Object.defineProperty(collection, "all", {
+            value: flattened,
+            writable: false,
+            enumerable: true
+        });
 
         function add(item) {
             var items = Array.isArray(item) ? item : [item];
