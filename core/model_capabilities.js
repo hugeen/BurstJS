@@ -2,24 +2,24 @@ define(function(require) {
 
     var eventCapabilities = require("burst/core/event_capabilities");
 
-    return function(BurstModel) {
+    return function(Model) {
 
         var index = 0;
         var collection = {};
 
-        eventCapabilities(BurstModel);
+        eventCapabilities(Model);
 
-        Object.defineProperty(BurstModel, "all", {
+        Object.defineProperty(Model, "all", {
             value: collection,
             writable: false,
             enumerable: true
         });
 
-        BurstModel.find = function(identifier) {
+        Model.find = function(identifier) {
             return collection[identifier];
         };
 
-        BurstModel.create = function() {
+        Model.create = function() {
             var model = eventCapabilities({});
             model.identifier = index;
             collection[model.identifier] = model;
@@ -32,12 +32,12 @@ define(function(require) {
                 }
             });
 
-            BurstModel.emit.apply(BurstModel, ["instance created", model].concat(arguments));
+            Model.emit.apply(Model, ["instance created", model].concat(arguments));
 
             return model;
         };
 
-        return BurstModel;
+        return Model;
 
     };
 
