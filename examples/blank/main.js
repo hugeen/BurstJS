@@ -8,6 +8,6 @@ requirejs.config({
 
 require(['jquery', 'game'], function($, game) {
     $(function() {
-        console.log(game);
+
     });
 });
