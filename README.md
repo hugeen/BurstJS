@@ -6,8 +6,8 @@ Event-Driven HTML5 Game Framework
 
 * Still in *draft* form
 * Only compatible on modern browsers (*IE10+*, *Webkit*, ...)
-* Designed with an *innovative* and unexplored approach in the world of video games : The *MEC* Pattern (Models/Events/Capabilities)
-* Using the latest *HTML5* technologies, such as *WebGL*, *WebWorkers*, *WebSockets*
+* Designed with an *innovative* approach: The **MEC** Pattern (*Models/Events/Capabilities*)
+* Using the latest **HTML5** technologies, such as *WebGL*, *WebWorkers*, *WebSockets*
 * *Open-Source*, *Modular* and *Hackable*
 
 ## Walkthrough
