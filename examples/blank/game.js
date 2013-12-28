@@ -13,8 +13,7 @@ define(function(require) {
     Player.create().tag("aaa");
     Player.create().tag("hhh");
     Player.create().tag("hhh");
-
-    console.log(entities.hhh.aaa.hhh.zzz);
+    Player.create().tag("salut");
 
     return game;
 });

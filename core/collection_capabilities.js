@@ -26,20 +26,38 @@ define(function(require) {
 
         collection.remove = function(item) {
             var items = Array.isArray(item) ? item : [item];
+            collection.untagAll(item);
             items.forEach(function(item) {
                 var index = flattened.indexOf(item);
                 if (index !== -1) {
                     flattened.splice(index, 1);
                 }
             });
-
             return flattened;
         };
 
-        collection.tag = function(tagName, model) {
+        collection.tag = function(tagName, item) {
             var tag = tags[tagName] || collection.createTag(tagName);
-            tag.push(model);
+            tag.push(item);
             return collection;
+        };
+
+        collection.untag = function(tagName, item) {
+            var tag = tags[tagName] || false;
+            if (!tag) {
+                return collection;
+            }
+            var index = tag.indexOf(item);
+            if (index !== -1) {
+                tag.splice(index, 1);
+            }
+            return collection;
+        };
+
+        collection.untagAll = function(item) {
+            tagNames.forEach(function(tagName) {
+                collection.untag(tagName, item);
+            });
         };
 
         collection.createTag = function(tagName) {
@@ -50,7 +68,8 @@ define(function(require) {
                     var tag = tags[tagName];
                     tagCascade(tag);
                     return tag;
-                }
+                },
+                configurable: true
             });
             return tags[tagName];
         };
@@ -68,7 +87,8 @@ define(function(require) {
                         });
                         tagCascade(filtered);
                         return filtered;
-                    }
+                    },
+                    configurable: true
                 });
             });
         }

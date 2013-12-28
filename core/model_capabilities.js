@@ -4,17 +4,8 @@ define(function(require) {
 
     return function(Model) {
 
-        var index = 0;
-        var models = {};
         var collections = [];
-
         eventCapabilities(Model);
-
-        Object.defineProperty(Model, "all", {
-            value: models,
-            writable: false,
-            enumerable: true
-        });
 
         Model.find = function(identifier) {
             return collection[identifier];
@@ -22,17 +13,14 @@ define(function(require) {
 
         Model.create = function() {
             var model = eventCapabilities({});
-            model.identifier = index;
-            models[model.identifier] = model;
-            index += 1;
 
             Object.defineProperty(model, "destroy", {
                 get: function() {
                     collections.forEach(function(collection) {
                         collection.remove(model);
                     });
-                    delete collection[model.identifier];
                     Model.emit("instance destroyed", model);
+                    return Model;
                 }
             });
 
@@ -61,14 +49,7 @@ define(function(require) {
 
         Model.bindCollection = function(collection) {
             collections.push(collection);
-            return Model;
-        };
 
-        Model.removeCollection = function(collection) {
-            var index = collections.indexOf(collection);
-            if (index !== -1) {
-                collections.splice(index, 1);
-            }
             return Model;
         };
 
