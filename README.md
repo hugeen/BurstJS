@@ -14,12 +14,12 @@ Event-Driven HTML5 Game Framework
 
 Here we go! But first, tell me who are you, why are you here?
 
-* I would like to learn programming by doing my first video game
-* I am a developer and I want a serious alternative to existing games engines
-* I'm just curious
+* [I would like to learn programming by doing my first video game](#start)
+* [I am a developer and I want a serious alternative to existing games engines](#compare)
+* [I'm just curious](#teaser)
 
-### Build your first game
+### <a name="start"></a>Build your first game
 
-### The BurstJS approach compared to other game engines
+### <a name="compare"></a>The BurstJS approach compared to other game engines
 
-### You should try it!
+### <a name="teaser"></a>You should try it!
