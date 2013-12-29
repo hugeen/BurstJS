@@ -7,6 +7,6 @@ requirejs.config({
 
 require(['burst/utils/dom_utils', 'game'], function(domUtils, game) {
     domUtils(function() {
-        console.log("dom ready");
+        game.emit("start");
     });
 });
