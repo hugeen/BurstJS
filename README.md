@@ -20,6 +20,28 @@ Here we go! But first, tell me who are you, why are you here?
 
 ### Build your first game
 
+Coming soon.
+
 ### The BurstJS approach compared to other game engines
 
+Coming soon.
+
 ### You should try it!
+
+Coming soon.
+
+## Upcoming Features
+
+* Assets loader
+* Native WebGL renderer
+* Command-Line utility
+* Inputs capabilities
+* Keyboard optional module
+* Gamepad optional module
+* Mouse optional module
+* Touch optional module
+* WebWorkers optional module
+* Minimalistic physics engine
+* Views editor
+* Map editor
+* Spritesheet editor
