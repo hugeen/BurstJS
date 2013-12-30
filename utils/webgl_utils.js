@@ -1,18 +1,20 @@
 define(function() {
 
+    var webglUtils = {};
+
     var defaultShaderType = ["VERTEX_SHADER", "FRAGMENT_SHADER"];
     var browserPrefixes = ["", "MOZ_", "OP_", "WEBKIT_"];
 
-    function enumToString(gl, value) {
+    webglUtils.enumToString = function(gl, value) {
         for (var p in gl) {
             if (gl[p] == value) {
                 return p;
             }
         }
         return "0x" + value.toString(16);
-    }
+    };
 
-    function setupWebGL(canvas, params) {
+    webglUtils.setupWebGL = function(canvas, params) {
         var context;
         try {
             context = canvas.getContext("webgl", params);
@@ -21,9 +23,9 @@ define(function() {
         }
 
         return context;
-    }
+    };
 
-    function loadShader(gl, shaderSource, shaderType, errorCallback) {
+    webglUtils.loadShader = function(gl, shaderSource, shaderType, errorCallback) {
         var errFn = errorCallback || error;
 
         var shader = gl.createShader(shaderType);
@@ -37,9 +39,9 @@ define(function() {
         }
 
         return shader;
-    }
+    };
 
-    function loadProgram(gl, shaders, params, locations, errorCallback) {
+    webglUtils.loadProgram = function(gl, shaders, params, locations, errorCallback) {
         var errFn = errorCallback || error;
         var program = gl.createProgram();
         var i;
@@ -59,9 +61,9 @@ define(function() {
             return null;
         }
         return program;
-    }
+    };
 
-    function createShaderFromScript(gl, scriptId, opt_shaderType, errorCallback) {
+    webglUtils.createShaderFromScript = function(gl, scriptId, opt_shaderType, errorCallback) {
         var shaderSource = "";
         var shaderType;
         var shaderScript = document.getElementById(scriptId);
@@ -80,22 +82,22 @@ define(function() {
             }
         }
 
-        return loadShader(gl, shaderSource, opt_shaderType ? opt_shaderType : shaderType, errorCallback);
-    }
+        return webglUtils.loadShader(gl, shaderSource, opt_shaderType ? opt_shaderType : shaderType, errorCallback);
+    };
 
 
 
-    function createProgramFromScripts(gl, shaderScriptIds, params, locations, errorCallback) {
+    webglUtils.createProgramFromScripts = function(gl, shaderScriptIds, params, locations, errorCallback) {
         var shaders = [];
         for (var i = 0; i < shaderScriptIds.length; i++) {
-            shaders.push(createShaderFromScript(gl, shaderScriptIds[i], gl[defaultShaderType[i]], errorCallback));
+            shaders.push(webglUtils.createShaderFromScript(gl, shaderScriptIds[i], gl[defaultShaderType[i]], errorCallback));
         }
-        return loadProgram(gl, shaders, params, locations, errorCallback);
-    }
+        return webglUtils.loadProgram(gl, shaders, params, locations, errorCallback);
+    };
 
 
 
-    function getExtensionWithKnownPrefixes(gl, name) {
+    webglUtils.getExtensionWithKnownPrefixes = function(gl, name) {
         for (var i = 0; i < browserPrefixes.length; i++) {
             var prefixedName = browserPrefixes[i] + name;
             var ext = gl.getExtension(prefixedName);
@@ -104,24 +106,15 @@ define(function() {
             }
         }
         return null;
-    }
+    };
 
-    function resizeCanvasToDisplaySize(canvas) {
+    webglUtils.resizeCanvasToDisplaySize = function(canvas) {
         if (canvas.width != canvas.clientWidth || canvas.height != canvas.clientHeight) {
             canvas.width = canvas.clientWidth;
             canvas.height = canvas.clientHeight;
         }
-    }
-
-    return {
-        enumToString: enumToString,
-        setupWebGL: setupWebGL,
-        loadShader: loadShader,
-        loadProgram: loadProgram,
-        createShaderFromScript: createShaderFromScript,
-        createProgramFromScripts: createProgramFromScripts,
-        getExtensionWithKnownPrefixes: getExtensionWithKnownPrefixes,
-        resizeCanvasToDisplaySize: resizeCanvasToDisplaySize
     };
+
+    return webglUtils;
 
 });
