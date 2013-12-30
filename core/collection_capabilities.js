@@ -36,7 +36,7 @@ define(function(require) {
         };
 
         collection.tag = function(tagName, item) {
-            var tag = tags[tagName] || collection.createTag(tagName);
+            var tag = tags[tagName] || createTag(tagName);
             tag.push(item);
             return collection;
         };
@@ -59,7 +59,7 @@ define(function(require) {
             });
         };
 
-        collection.createTag = function(tagName) {
+        function createTag(tagName) {
             tagNames.push(tagName);
             tags[tagName] = Object.create(Array.prototype);
             Object.defineProperty(collection, tagName, {
