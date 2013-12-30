@@ -1,4 +1,4 @@
-# BurstJS by [Mugeen Games](http://www.mugeengames.com)
+# BurstJS
 
 Event-Driven HTML5 Game Framework
 
@@ -45,3 +45,7 @@ Coming soon.
 * Views editor
 * Map editor
 * Spritesheet editor
+
+## Credits
+* [Toxicode](http://www.toxicode.fr)
+* [Mugeen Games](http://www.mugeengames.com)
