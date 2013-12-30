@@ -1,4 +1,4 @@
-define(function(require) {
+define(function() {
 
     function domUtils(selector) {
         return document.querySelectorAll(selector);
