@@ -30,22 +30,22 @@ Coming soon.
 
 Coming soon.
 
-## Upcoming Features
+## Upcoming features
 
-* Assets loader
+* Assets loader (Images, Sounds, Templates, JSON)
 * Native WebGL renderer
-* Command-Line utility
-* Inputs capabilities
-* Keyboard optional module
-* Gamepad optional module
-* Mouse optional module
-* Touch optional module
-* WebWorkers optional module
 * Minimalistic physics engine
-* Views editor
+* Inputs (Mouse, Keyboard, Touch, Gamepad)
+* Improved DOM Utils (jQuery-like)
+
+### Planned features
+
+* WebWorkers
+* UI editor
 * Map editor
 * Spritesheet editor
 
 ## Credits
+
 * [Toxicode](http://www.toxicode.fr)
 * [Mugeen Games](http://www.mugeengames.com)
