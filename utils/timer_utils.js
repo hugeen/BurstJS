@@ -1,6 +1,8 @@
-define(function(require) {
+define(function() {
 
-    function throttle(func, wait, options) {
+    var timerUtils = {};
+
+    timerUtils.throttle = function(func, wait, options) {
         var context, args, result;
         var timeout = null;
         var previous = 0;
@@ -33,10 +35,8 @@ define(function(require) {
 
             return result;
         };
-    }
-
-    return {
-        throttle: throttle
     };
+
+    return timerUtils;
 
 });
