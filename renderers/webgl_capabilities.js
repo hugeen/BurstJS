@@ -1,14 +1,14 @@
 define(function(require) {
 
     var eventCapabilities = require("burst/core/event_capabilities");
-    var glUtils = require("burst/utils/webgl_utils");
+    var $ = require("burst/libs/zepto");
 
     return function(webgl) {
 
         eventCapabilities(webgl);
 
-        webgl.on("initialize", function() {
-
+        webgl.on("initialize", function(params) {
+            webgl.canvas = $("<canvas />").appendTo(params.container);
         });
 
         webgl.on("draw", function() {
