@@ -39,8 +39,7 @@ Coming soon.
 ### Upcoming
 
 * WebGL renderer
-* Scenes
-* Improved DOM Utils (jQuery-like)
+* Views
 * Inputs (Mouse, Keyboard, Touch, Gamepad)
 * Minimalistic physics engine
 * Assets loader (Images, Sounds, Templates, JSON)
@@ -52,6 +51,13 @@ Coming soon.
 * UI editor
 * Map editor
 * Spritesheet editor
+
+## Dependencies
+
+* [RequireJS](http://requirejs.org/) Modular architecture
+* [Zepto](http://zeptojs.com/) DOM utils
+* [Mustache](https://github.com/janl/mustache.js/) Templating system
+
 
 ## Credits
 
