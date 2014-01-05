@@ -53,6 +53,6 @@ Coming soon.
 
 ## Credits
 
-* [Cyrille Bogaert - *@hugeen*](http://www.twitter.com/hugeen)
-* [Toxicode](http://www.toxicode.fr)
-* [Mugeen Games](http://www.mugeengames.com)
+* [Cyrille Bogaert](http://www.hugeen.com) - [@hugeen](https://twitter.com/hugeen/)
+* [Toxicode](http://www.toxicode.fr) - [@toxicode_fr](https://twitter.com/toxicode_fr/)
+* [Mugeen Games](http://www.mugeengames.com) - [@mugeengames](https://twitter.com/mugeengames/)
