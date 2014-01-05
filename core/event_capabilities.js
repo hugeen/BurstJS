@@ -11,6 +11,7 @@ define(function() {
         var events = {
             root: {}
         };
+
         object.on = function(identifier, fnc) {
             if (Array.isArray(identifier)) {
                 var scopes = identifier;

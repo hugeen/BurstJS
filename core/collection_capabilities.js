@@ -32,12 +32,14 @@ define(function(require) {
                     flattened.splice(index, 1);
                 }
             });
+
             return flattened;
         };
 
         collection.tag = function(tagName, item) {
             var tag = tags[tagName] || createTag(tagName);
             tag.push(item);
+
             return collection;
         };
 
@@ -50,6 +52,7 @@ define(function(require) {
             if (index !== -1) {
                 tag.splice(index, 1);
             }
+
             return collection;
         };
 
@@ -57,6 +60,8 @@ define(function(require) {
             tagNames.forEach(function(tagName) {
                 collection.untag(tagName, item);
             });
+
+            return collection;
         };
 
         function createTag(tagName) {
@@ -64,32 +69,31 @@ define(function(require) {
             tags[tagName] = Object.create(Array.prototype);
             Object.defineProperty(collection, tagName, {
                 get: function() {
-                    var tag = tags[tagName];
-                    tagCascade(tag);
-                    return tag;
+                    return tagCascade(tags[tagName]);
                 },
                 configurable: true
             });
+
             return tags[tagName];
         };
 
-        function tagCascade(parent) {
+        function tagCascade(parentTag) {
             tagNames.forEach(function(tagName) {
-                Object.defineProperty(parent, tagName, {
+                Object.defineProperty(parentTag, tagName, {
                     get: function() {
-                        var tag = tags[tagName];
                         var filtered = [];
-                        tag.forEach(function(item) {
-                            if (parent.indexOf(item) !== -1) {
+                        tags[tagName].forEach(function(item) {
+                            if (parentTag.indexOf(item) !== -1) {
                                 filtered.push(item);
                             }
                         });
-                        tagCascade(filtered);
-                        return filtered;
+                        return tagCascade(filtered);
                     },
                     configurable: true
                 });
             });
+
+            return parentTag;
         }
 
         return collection;

@@ -1,60 +1,42 @@
 define(function(require) {
 
     var eventCapabilities = require("burst/core/event_capabilities");
+    var collectionCapabilities = require("burst/core/collection_capabilities");
 
     return function(Model) {
 
-        var collections = [];
         eventCapabilities(Model);
-
-        Model.find = function(identifier) {
-            return collection[identifier];
-        };
+        collectionCapabilities(Model);
 
         Model.create = function() {
-            var model = eventCapabilities({});
 
-            Object.defineProperty(model, "destroy", {
+            var instance = eventCapabilities({});
+            Model.add(instance);
+
+            instance.tag = function(tagName) {
+                Model.tag(tagName, instance);
+                return model;
+            };
+
+            instance.untag = function(tagName) {
+                Model.untag(tagName, instance);
+                return model;
+            };
+
+            Object.defineProperty(instance, "destroy", {
                 get: function() {
-                    collections.forEach(function(collection) {
-                        collection.remove(model);
-                    });
-                    Model.emit("instance destroyed", model);
+                    Model.remove(instance);
+                    Model.emit("instance destroyed", instance);
                     return Model;
                 }
             });
 
-            collections.forEach(function(collection) {
-                collection.add(model);
-            });
+            Model.emit.apply(Model, ["instance created", instance].concat(arguments));
 
-            model.tag = function(tagName) {
-                collections.forEach(function(collection) {
-                    collection.tag(tagName, model);
-                });
-                return model;
-            };
-
-            model.untag = function(tagName) {
-                collections.forEach(function(collection) {
-                    collection.untag(tagName, model);
-                });
-                return model;
-            };
-
-            Model.emit.apply(Model, ["instance created", model].concat(arguments));
-
-            return model;
-        };
-
-        Model.bindCollection = function(collection) {
-            collections.push(collection);
-
-            return Model;
+            return instance;
         };
 
         return Model;
-
     };
 
 });
