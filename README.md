@@ -30,7 +30,13 @@ Coming soon.
 
 Coming soon.
 
-## Upcoming features
+
+## Features
+
+* [**MEC**](https://github.com/hugeen/BurstJS/wiki/The-MEC-Pattern) based core
+* GameLoop
+
+### Upcoming
 
 * Assets loader (Images, Sounds, Templates, JSON)
 * Native WebGL renderer
@@ -38,7 +44,7 @@ Coming soon.
 * Inputs (Mouse, Keyboard, Touch, Gamepad)
 * Improved DOM Utils (jQuery-like)
 
-### Planned features
+### Planned
 
 * WebWorkers
 * UI editor
@@ -47,5 +53,6 @@ Coming soon.
 
 ## Credits
 
+* [Cyrille Bogaert (*@hugeen*)](http://www.twitter.com/hugeen)
 * [Toxicode](http://www.toxicode.fr)
 * [Mugeen Games](http://www.mugeengames.com)
