@@ -7,17 +7,17 @@ define(function(require) {
 
         eventCapabilities(webgl);
 
-        webgl.init = function() {
+        webgl.on("initialize", function() {
 
-        };
+        });
 
-        webgl.draw = function() {
+        webgl.on("draw", function() {
 
-        };
+        });
 
-        webgl.clear = function() {
+        webgl.on("clear", function() {
 
-        };
+        });
 
         function createProgram() {
 
