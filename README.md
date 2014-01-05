@@ -38,14 +38,16 @@ Coming soon.
 
 ### Upcoming
 
-* Assets loader (Images, Sounds, Templates, JSON)
-* Native WebGL renderer
-* Minimalistic physics engine
-* Inputs (Mouse, Keyboard, Touch, Gamepad)
+* WebGL renderer
+* Scenes
 * Improved DOM Utils (jQuery-like)
+* Inputs (Mouse, Keyboard, Touch, Gamepad)
+* Minimalistic physics engine
+* Assets loader (Images, Sounds, Templates, JSON)
 
 ### Planned
 
+* Debugging tools
 * WebWorkers
 * UI editor
 * Map editor
