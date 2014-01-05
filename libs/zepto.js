@@ -1549,7 +1549,6 @@ window.$ === undefined && (window.$ = Zepto)
   }
 })(Zepto)
 
-Zepto.noConflict();
 define(function() {
     return Zepto;
 });

@@ -5,8 +5,8 @@ requirejs.config({
     urlArgs: "bust=" + (new Date()).getTime()
 });
 
-require(['burst/utils/dom_utils', 'game'], function($, game) {
-    $.ready(function() {
+require(['burst/libs/zepto', 'game'], function($, game) {
+    $(function() {
         game.emit("start");
     });
 });
