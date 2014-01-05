@@ -2,6 +2,7 @@ define(function(require) {
 
     var eventCapabilities = require("burst/core/event_capabilities");
     var collectionCapabilities = require("burst/core/collection_capabilities");
+    var slice = Array.prototype.slice;
 
     return function(Model) {
 
@@ -15,12 +16,12 @@ define(function(require) {
 
             instance.tag = function(tagName) {
                 Model.tag(tagName, instance);
-                return model;
+                return instance;
             };
 
             instance.untag = function(tagName) {
                 Model.untag(tagName, instance);
-                return model;
+                return instance;
             };
 
             Object.defineProperty(instance, "destroy", {
@@ -31,9 +32,16 @@ define(function(require) {
                 }
             });
 
-            Model.emit.apply(Model, ["instance created", instance].concat(arguments));
+            Model.emit.apply(Model, ["instance created", instance].concat(slice.call(arguments)));
 
             return instance;
+        };
+
+        Model.alias = function(aliasName, value) {
+            Object.defineProperty(Model, aliasName, {
+                value: value,
+                configurable: true
+            });
         };
 
         return Model;

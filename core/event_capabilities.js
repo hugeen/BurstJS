@@ -12,63 +12,66 @@ define(function() {
             root: {}
         };
 
-        object.on = function(identifier, fnc) {
+        object.on = function(identifier, listener) {
             if (Array.isArray(identifier)) {
                 var scopes = identifier;
                 identifier = identifier.pop();
                 scopes.forEach(function(scope) {
-                    events[scope] = events[scope] || {};
-                    events[scope][identifier] = events[scope][identifier] || [];
-                    events[scope][identifier].push(fnc);
+                    pushListener(scope, identifier, listener);
                 });
             } else {
-                events.root[identifier] = events.root[identifier] || [];
-                events.root[identifier].push(fnc);
+                pushListener("root", identifier, listener);
             }
         };
 
-        object.off = function(identifier, fnc) {
+        object.off = function(identifier, listener) {
             if (Array.isArray(identifier)) {
                 var scopes = identifier;
                 identifier = identifier.pop();
                 scopes.forEach(function(scope) {
-                    events[scope] = events[scope] || {};
-                    if (identifier in events[scope] === false) {
-                        return;
-                    }
-                    events[scope][identifier].splice(events[scope][identifier].indexOf(fnc), 1);
+                    removeListener(scope, identifier, listener);
                 });
             } else {
-                if (identifier in events.root === false) {
-                    return;
-                }
-                events.root[identifier].splice(events.root[identifier].indexOf(fnc), 1);
+                removeListener("root", identifier, listener);
             }
 
         };
 
-        object.emit = function(identifier, fnc) {
+        object.emit = function(identifier) {
             if (Array.isArray(identifier)) {
                 var scopes = identifier;
                 identifier = identifier.pop();
                 scopes.forEach(function(scope) {
-                    events[scope] = events[scope] || {};
-                    if (identifier in events[scope] === false) {
-                        return;
-                    }
-                    for (var i = 0; i < events[scope][identifier].length; i++) {
-                        events[scope][identifier][i].apply(object, slice.call(arguments, 1));
-                    }
+                    callListeners(scope, identifier, slice.call(arguments, 1));
                 });
             } else {
-                if (identifier in events.root === false) {
-                    return;
-                }
-                for (var i = 0; i < events.root[identifier].length; i++) {
-                    events.root[identifier][i].apply(object, slice.call(arguments, 1));
-                }
+                callListeners("root", identifier, slice.call(arguments, 1));
             }
         };
+
+        function callListeners(scope, identifier, args) {
+            events[scope] = events[scope] || {};
+            if (identifier in events[scope] === false) {
+                return;
+            }
+            for (var i = 0; i < events[scope][identifier].length; i++) {
+                events[scope][identifier][i].apply(object, args);
+            }
+        }
+
+        function pushListener(scope, identifier, listener) {
+            events[scope] = events[scope] || {};
+            events[scope][identifier] = events[scope][identifier] || [];
+            events[scope][identifier].push(listener);
+        }
+
+        function removeListener(scope, identifier, listener) {
+            events[scope] = events[scope] || {};
+            if (identifier in events[scope] === false) {
+                return;
+            }
+            events[scope][identifier].splice(events[scope][identifier].indexOf(listener), 1);
+        }
 
         return object;
 

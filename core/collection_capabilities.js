@@ -1,7 +1,5 @@
 define(function(require) {
 
-    var eventCapabilities = require("burst/core/event_capabilities");
-
     return function(collection) {
 
         var flattened = Object.create(Array.prototype);
