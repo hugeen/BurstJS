@@ -1,13 +1,12 @@
 define(function(require) {
-    var game = require("burst/core/event_capabilities")({});
-    var $ = require("burst/utils/dom_utils");
 
-    var stage = require("burst/core/stage_capabilities")({});
+    var $ = require("burst/utils/dom_utils");
+    var game = require("burst/core/event_capabilities")({});
+    var webglCapabilities = require("burst/renderers/webgl_capabilities");
+    var Stage = require("burst/engine/stage");
 
     game.on("start", function() {
-        var canvas = $.create("canvas");
-        $.find("plagueworks").appendChild(canvas);
-        stage.setupRenderer(canvas);
+        stage.create($.find("plagueworks"), webglCapabilities, {});
     });
 
     return game;

@@ -11,7 +11,7 @@ define(function(require) {
 
         Model.create = function() {
 
-            var instance = eventCapabilities({});
+            var instance = {};
             Model.add(instance);
 
             instance.tag = function(tagName) {

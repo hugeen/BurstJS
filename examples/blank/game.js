@@ -6,7 +6,6 @@ define(function(require) {
     // Game handler
     var game = eventCapabilities({});
 
-
     // Player
     var Player = modelCapabilities({});
 
@@ -22,9 +21,8 @@ define(function(require) {
     game.on("start", function() {
 
         // Create a player
-        Player.create();
-        Player.alias("selfPlayer", Player.create(1, {salut: "coucou"}));
-        Player.alias("selfPlayer", Player.create());
+        var player = Player.create();
+        Player.alias("selfPlayer", player);
         Player.emit(["selfPlayer", "ready"], "hello");
     });
 
