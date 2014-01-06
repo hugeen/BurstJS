@@ -2,11 +2,13 @@ define(function(require) {
 
     var $ = require("burst/libs/zepto");
     var game = require("burst/core/event_capabilities")({});
-    var webglCapabilities = require("burst/renderers/webgl_capabilities");
-    var Stage = require("burst/engine/stage");
+    var domCapabilities = require("burst/renderers/dom_capabilities");
+    var View = require("burst/engine/models/view");
 
     game.on("start", function() {
-        stage.create($("#plagueworks"), webglCapabilities, {});
+        View.create($("#plagueworks"), domCapabilities, {
+            template: "loading.mustache" 
+        });
     });
 
     return game;

@@ -4,7 +4,6 @@ define(function(require) {
     var modelCapabilities = require("burst/core/model_capabilities");
 
     var $ = require("burst/libs/zepto");
-    console.log($);
 
     // Game handler
     var game = eventCapabilities({});

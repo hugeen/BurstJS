@@ -2,11 +2,12 @@ define(function(require) {
 
     var modelCapabilities = require("burst/core/model_capabilities");
 
-    return function(View) {
+    return function() {
 
-        modelCapabilities(View);
+        var View = modelCapabilities({});
 
-        View.on("instance created", function(view, rendererCapabilities, params) {
+        View.on("instance created", function(view, container, rendererCapabilities, params) {
+ 
             rendererCapabilities(view);
             view.emit("initialize", params);
         });

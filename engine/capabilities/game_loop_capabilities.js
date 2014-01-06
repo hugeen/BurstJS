@@ -6,19 +6,19 @@ define(function(require) {
 
         eventCapabilities(gameLoop);
 
-        var lastTime;
+        var lastTime = undefined;
         var active = false;
 
-        gameLoop.start = function() {
+        gameLoop.on("resume", function() {
             if (!active) {
                 active = true;
                 loop();
             }
-        };
+        });
 
-        gameLoop.stop = function() {
+        gameLoop.on("resume", function() {
             active = false;
-        };
+        });
 
         function loop() {
             requestAnimationFrame(function(time) {
@@ -30,6 +30,8 @@ define(function(require) {
                 }
             });
         }
+
+        return gameLoop;
     };
 
 });

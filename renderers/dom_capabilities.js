@@ -9,6 +9,9 @@ define(function(require) {
 
         dom.on("initialize", function(params) {
             dom.el = $("<div />").appendTo(params.container);
+            $.get(params.templateUrl, function(response) {
+                console.log(response);
+            });
         });
 
         dom.on("draw", function() {
