@@ -7,19 +7,22 @@ define(function(require) {
 
         eventCapabilities(dom);
 
-        dom.on("initialize", function(params) {
-            dom.el = $("<div />").appendTo(params.container);
-            $.get(params.templateUrl, function(response) {
-                console.log(response);
-            });
-        });
+        dom.on("render", function(params) {
+            dom.el = $("<div>");
+            dom.el.appendTo(params.container);
+            dom.el.append(params.template);
 
-        dom.on("draw", function() {
-
+            dom.stylesheet = $("<link>");
+            dom.stylesheet.appendTo($('head'));
+            dom.attr({
+                type: 'text/css',
+                rel: 'stylesheet'
+            }).text(params.stylesheet);
         });
 
         dom.on("clear", function() {
-            dom.el.html("");
+            dom.el.remove();
+            dom.stylesheet.remove();
         });
 
         return dom;

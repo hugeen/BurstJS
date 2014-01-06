@@ -6,8 +6,9 @@ define(function(require) {
     var View = require("burst/engine/models/view");
 
     game.on("start", function() {
-        View.create($("#plagueworks"), domCapabilities, {
-            template: "loading.mustache" 
+        View.create(domCapabilities, {
+            name: "level",
+            container: $("#plagueworks")
         });
     });
 
