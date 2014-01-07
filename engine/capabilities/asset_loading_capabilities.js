@@ -7,14 +7,23 @@ define(function(require) {
 
         eventCapabilities(asset);
 
-        asset.loaded = false;
+        asset.readyState = "initialized";
 
         asset.on("load", function() {
-            $.get(asset.url, function(response) {
-                asset.raw = response;
-                asset.loaded = true;
+            if (asset.readyState === "loaded") {
                 asset.emit("loaded");
-            });
+            }
+
+            if (asset.readyState === "initialized") {
+                asset.readyState = "processing";
+                asset.untag("toLoad");
+
+                $.get(asset.url, function(response) {
+                    asset.raw = response;
+                    asset.readyState = "loaded";
+                    asset.emit("loaded");
+                });
+            }
         });
 
         return asset;
