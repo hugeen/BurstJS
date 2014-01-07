@@ -7,10 +7,13 @@ define(function(require) {
     var Asset = require("burst/engine/models/asset");
 
     game.on("start", function() {
+
+        // Views stuff
         // View.create(domCapabilities, {
         //     name: "level",
         //     container: $("#plagueworks")
         // });
+        // Assets stuff
         // var assets = ["achievements.png", "background.png", "credits.png", "gem-blob.png"];
         // assets.forEach(function(assetName) {
         //     Asset.create({
@@ -22,8 +25,14 @@ define(function(require) {
         //         url: "assets/images/" + assetName
         //     }).tag("hello");
         // });
+        // 
+        // Asset.on(["main", "loaded"], function() {
+        //     console.log("main assets loaded");
+        // });
+        // 
         // Asset.emit("load by tag", "main");
         // Asset.emit("load by tag", "hello");
     });
+
     return game;
 });

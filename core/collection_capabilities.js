@@ -73,7 +73,7 @@ define(function(require) {
             });
 
             return tags[tagName];
-        };
+        }
 
         function tagCascade(parentTag) {
             tagNames.forEach(function(tagName) {

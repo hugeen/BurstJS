@@ -6,26 +6,26 @@ define(function(require) {
 
         eventCapabilities(gameLoop);
 
-        var lastTime = undefined;
-        var active = false;
+        gameLoop.updatedAt = undefined;
+        gameLoop.active = false;
 
         gameLoop.on("resume", function() {
-            if (!active) {
-                active = true;
+            if (!gameLoop.active) {
+                gameLoop.active = true;
                 loop();
             }
         });
 
         gameLoop.on("resume", function() {
-            active = false;
+            gameLoop.active = false;
         });
 
         function loop() {
             requestAnimationFrame(function(time) {
-                var delta = time - (lastTime || time);
-                lastTime = time;
+                var delta = time - (gameLoop.updatedAt || time);
+                gameLoop.updatedAt = time;
                 gameLoop.emit("update", delta / 1000);
-                if (active) {
+                if (gameLoop.active) {
                     loop();
                 }
             });

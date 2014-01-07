@@ -1,6 +1,7 @@
 define(function(require) {
 
     var modelCapabilities = require("burst/core/model_capabilities");
+
     var View = modelCapabilities({});
 
     View.on("instance created", function(view, container, rendererCapabilities, params) {

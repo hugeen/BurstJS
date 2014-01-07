@@ -34,7 +34,6 @@ define(function() {
             } else {
                 removeListener("root", identifier, listener);
             }
-
         };
 
         object.emit = function(identifier) {
