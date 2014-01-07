@@ -4,9 +4,9 @@ define(function(require) {
 
     var View = modelCapabilities({});
 
-    View.on("instance created", function(view, container, rendererCapabilities, params) {
+    View.on("instance created", function(view, rendererCapabilities, params) {
         rendererCapabilities(view);
-        view.emit("render", params);
+        view.emit("initialize", params);
     });
 
     View.on("instance destroyed", function(view) {
