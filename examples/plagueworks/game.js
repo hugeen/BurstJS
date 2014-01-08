@@ -8,11 +8,21 @@ define(function(require) {
 
     game.on("start", function() {
 
-        // Views stuff
-        View.create(domCapabilities, {
-            template: "hello world",
-            container: $("#plagueworks")
-        }).emit("render");
+        Asset.create({
+            name: "title.mustache",
+            url: "assets/templates/"
+        }).tag("main");
+
+
+        Asset.where({
+            name: "title.mustache"
+        });
+
+        // // Views stuff
+        // var titleScreen = View.create(domCapabilities, {
+        //     template: "hello world",
+        //     container: $("#plagueworks")
+        // }).emit("render");
         // Assets stuff
         // var assets = ["achievements.png", "background.png", "credits.png", "gem-blob.png"];
         // assets.forEach(function(assetName) {

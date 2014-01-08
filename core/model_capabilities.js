@@ -48,7 +48,6 @@ define(function(require) {
             Object.defineProperty(Model, aliasName, def);
         };
 
-
         return Model;
     };
 
