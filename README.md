@@ -62,5 +62,6 @@ Coming soon.
 ## Credits
 
 * [Cyrille Bogaert](http://www.hugeen.com) - [@hugeen](https://twitter.com/hugeen/)
+* [Pierre Lancien](https://github.com/plancien)
 * [Toxicode](http://www.toxicode.fr) - [@toxicode_fr](https://twitter.com/toxicode_fr/)
 * [Mugeen Games](http://www.mugeengames.com) - [@mugeengames](https://twitter.com/mugeengames/)
