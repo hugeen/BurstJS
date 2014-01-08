@@ -38,11 +38,16 @@ define(function(require) {
         };
 
         Model.alias = function(aliasName, value) {
-            Object.defineProperty(Model, aliasName, {
-                value: value,
-                configurable: true
-            });
+            var def = {};
+            def.configurable = true;
+            if (typeof value === "function") {
+                def.get = value;
+            } else {
+                def.value = value;
+            }
+            Object.defineProperty(Model, aliasName, def);
         };
+
 
         return Model;
     };
