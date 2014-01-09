@@ -8,16 +8,26 @@ define(function(require) {
 
     game.on("start", function() {
 
-        Asset.create({
-            name: "title.mustache",
-            url: "assets/templates/"
-        }).tag("main");
-
-
-        Asset.where({
-            name: "title.mustache"
-        });
-
+        // Asset.create({
+        //     name: "title.mustache",
+        //     url: "assets/templates/"
+        // }).tag("aaa");
+        // 
+        // Asset.create({
+        //     name: "hello.mustache",
+        //     url: "assets/templates/"
+        // }).tag("main");
+        // 
+        // Asset.create({
+        //     name: "arf.mustache",
+        //     url: "assets/arf/"
+        // }).tag("main");
+        // 
+        // console.log(Asset.main.main.find("url", 'assets/templates/'));
+        // console.log(Asset.where({
+        //     name: "title.mustache",
+        //     url: 'assets/templates/'
+        // }));
         // // Views stuff
         // var titleScreen = View.create(domCapabilities, {
         //     template: "hello world",

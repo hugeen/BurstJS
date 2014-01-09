@@ -1,8 +1,38 @@
 define(function(require) {
 
+    var _ = require("burst/utils/object_utils");
+    var slice = Array.prototype.slice;
+
+    function finderCapabilities(collection) {
+
+        collection.find = function() {
+            var where = collection.where.apply(collection, slice.call(arguments));
+            return where.length > 0 ? where[0] : false;
+        };
+
+        collection.where = function() {
+            var conditions = {};
+            if (typeof arguments[0] === "string") {
+                conditions[arguments[0]] = arguments[1];
+            } else {
+                conditions = arguments[0];
+            }
+            return collection.filter(function(item) {
+                var satisfiedCondition = false;
+                _.forEach(conditions, function(condition, key) {
+                    satisfiedCondition = typeof item[key] !== "undefined" && item[key] === condition;
+                });
+                return satisfiedCondition;
+            });
+        };
+
+    }
+
     return function(collection) {
 
         var flattened = Object.create(Array.prototype);
+        finderCapabilities(flattened);
+
         var tags = {};
         var tagNames = [];
 
@@ -11,6 +41,14 @@ define(function(require) {
             writable: false,
             enumerable: true
         });
+
+        collection.find = function() {
+            return flattened.find.apply(flattened, slice.call(arguments));
+        };
+
+        collection.where = function() {
+            return flattened.where.apply(flattened, slice.call(arguments));
+        };
 
         collection.add = function(item) {
             var items = Array.isArray(item) ? item : [item];
@@ -65,6 +103,7 @@ define(function(require) {
         function createTag(tagName) {
             tagNames.push(tagName);
             tags[tagName] = Object.create(Array.prototype);
+            finderCapabilities(tags[tagName]);
             Object.defineProperty(collection, tagName, {
                 get: function() {
                     return tagCascade(tags[tagName]);
@@ -85,6 +124,7 @@ define(function(require) {
                                 filtered.push(item);
                             }
                         });
+                        finderCapabilities(filtered);
                         return tagCascade(filtered);
                     },
                     configurable: true
