@@ -1,6 +1,7 @@
 define(function() {
 
     var objectUtils = {};
+    var slice = Array.prototype.slice;
 
     objectUtils.clone = function(object) {
         var clone = {};
@@ -9,6 +10,7 @@ define(function() {
                 clone[i] = object[i];
             }
         }
+
         return clone;
     };
 
@@ -16,7 +18,18 @@ define(function() {
         for (var property in source) {
             destination[property] = source[property];
         }
+
         return destination;
+    };
+
+    objectUtils.forEach = function(object, iterator, context) {
+        for (var key in object) {
+            if (object.hasOwnProperty(key)) {
+                iterator.call(context, object[key], key, object);
+            }
+        }
+
+        return object;
     };
 
     return objectUtils;
