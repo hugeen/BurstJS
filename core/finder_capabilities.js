@@ -1,13 +1,13 @@
 define(function(require) {
 
-    var _ = require("burst/utils/object_utils");
     var slice = Array.prototype.slice;
 
     return function(enumerable) {
 
         enumerable.find = function() {
             var where = enumerable.where.apply(enumerable, slice.call(arguments));
-            return where.length > 0 ? where[0] : false;
+
+            return where.length > 0 ? where[0] : null;
         };
 
         enumerable.where = function() {
@@ -17,11 +17,15 @@ define(function(require) {
             } else {
                 conditions = arguments[0];
             }
+
             return enumerable.filter(function(item) {
                 var satisfiedCondition = false;
-                _.forEach(conditions, function(condition, key) {
-                    satisfiedCondition = typeof item[key] !== "undefined" && item[key] === condition;
-                });
+                for (var key in conditions) {
+                    if (object.hasOwnProperty(key)) {
+                        satisfiedCondition = typeof item[key] !== "undefined" && item[key] === conditions[key];
+                    }
+                }
+
                 return satisfiedCondition;
             });
         };

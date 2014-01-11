@@ -25,7 +25,7 @@ define(function(require) {
                 collection.all.push(item);
             });
 
-            return flattened;
+            return collection;
         };
 
         collection.remove = function(item) {
@@ -38,7 +38,7 @@ define(function(require) {
                 }
             });
 
-            return collection.all;
+            return collection;
         };
 
         return collection;

@@ -46,6 +46,8 @@ define(function(require) {
                 def.value = value;
             }
             Object.defineProperty(Model, aliasName, def);
+
+            return Model;
         };
 
         return Model;
