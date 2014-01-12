@@ -11,10 +11,10 @@ define(function(require) {
     var game = require("burst/core/event_capabilities")({});
 
     game.on("start", function() {
-
         View.create(domCapabilities, {
             id: "titleScreen",
             template: "templates/title.mustache",
+            stylesheet: "stylesheets/title.css",
             images: [
                 "images/achievements.png",
                 "images/background.png",
