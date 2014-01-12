@@ -12,7 +12,14 @@ define(function(require) {
         Model.create = function() {
 
             var instance = {};
-            Model.add(instance);
+
+            Object.defineProperty(instance, "destroy", {
+                get: function() {
+                    Model.remove(instance);
+                    Model.emit("instance destroyed", instance);
+                    return Model;
+                }
+            });
 
             instance.tag = function(tagName) {
                 Model.tag(tagName, instance);
@@ -24,13 +31,7 @@ define(function(require) {
                 return instance;
             };
 
-            Object.defineProperty(instance, "destroy", {
-                get: function() {
-                    Model.remove(instance);
-                    Model.emit("instance destroyed", instance);
-                    return Model;
-                }
-            });
+            Model.add(instance);
 
             Model.emit.apply(Model, ["instance created", instance].concat(slice.call(arguments)));
 
