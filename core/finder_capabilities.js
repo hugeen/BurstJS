@@ -2,15 +2,15 @@ define(function(require) {
 
     var slice = Array.prototype.slice;
 
-    return function(enumerable) {
+    return function(collection) {
 
-        enumerable.find = function() {
-            var where = enumerable.where.apply(enumerable, slice.call(arguments));
+        collection.find = function() {
+            var where = collection.where.apply(collection, slice.call(arguments));
 
             return where.length > 0 ? where[0] : null;
         };
 
-        enumerable.where = function() {
+        collection.where = function() {
             var conditions = {};
             if (typeof arguments[0] === "string") {
                 conditions[arguments[0]] = arguments[1];
@@ -18,10 +18,10 @@ define(function(require) {
                 conditions = arguments[0];
             }
 
-            return enumerable.filter(function(item) {
+            return collection.filter(function(item) {
                 var satisfiedCondition = false;
                 for (var key in conditions) {
-                    if (object.hasOwnProperty(key)) {
+                    if (conditions.hasOwnProperty(key)) {
                         satisfiedCondition = typeof item[key] !== "undefined" && item[key] === conditions[key];
                     }
                 }
