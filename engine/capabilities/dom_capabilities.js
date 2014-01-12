@@ -1,37 +1,58 @@
 define(function(require) {
 
-    var eventCapabilities = require("burst/core/event_capabilities");
     var $ = require("burst/libs/zepto");
+    var Mustache = require("burst/libs/mustache");
 
-    return function(dom) {
+    var eventCapabilities = require("burst/core/event_capabilities");
+    var Asset = require("burst/engine/models/asset");
 
-        eventCapabilities(dom);
+    return function(view) {
 
-        dom.state = "initialized";
+        eventCapabilities(view);
 
-        dom.on("initialize", function(params) {
-            dom.template = params.template;
-            dom.container = params.container;
+        view.state = "initialized";
+
+        view.on("initialize", function(params) {
+            view.templatePath = params.template || false;
+            view.container = params.container;
+            Asset.emit("add manifest", (params.images || []).concat(params.template), view.id);
         });
 
-        dom.on("render", function(params) {
-            if (dom.state === "rendered") {
-                dom.emit("clear");
+        view.on("load assets", function() {
+            view.state = "loading";
+            Asset.on(view.id + " loaded", function() {
+                if (view.templatePath) {
+                    view.template = Asset.find("path", view.templatePath).raw;
+                }
+                view.emit("render");
+            });
+            Asset.emit("load by tag", view.id);
+        });
+
+        view.on("render", function() {
+            if (view.state === "rendered") {
+                view.emit("clear");
             }
-            dom.el = $("<div>").html(dom.template).appendTo(dom.container);
-            dom.state = "rendered";
-            dom.emit("rendered");
-        });
-
-        dom.on("clear", function() {
-            if (dom.state === "rendered") {
-                dom.el.remove();
-                dom.state = "cleared";
-                dom.emit("cleared");
+            if (Asset.toLoad[view.id].length > 0) {
+                view.emit("load assets");
+            } else {
+                var compiledTemplate = Mustache.render(view.template, view);
+                console.log(compiledTemplate);
+                view.el = $("<div>").html(compiledTemplate).appendTo(view.container);
+                view.state = "rendered";
+                view.emit("rendered");
             }
         });
 
-        return dom;
+        view.on("clear", function() {
+            if (view.state === "rendered") {
+                view.el.remove();
+                view.state = "cleared";
+                view.emit("cleared");
+            }
+        });
+
+        return view;
     };
 
 });

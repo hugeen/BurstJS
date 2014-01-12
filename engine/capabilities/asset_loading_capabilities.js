@@ -18,7 +18,13 @@ define(function(require) {
                 asset.readyState = "processing";
                 asset.untag("toLoad");
 
-                $.get(asset.rootPath + asset.path, function(response) {
+                var path = asset.rootPath + asset.path;
+                if (typeof asset.noCache !== "undefined" && asset.noCache) {
+                    path += path.indexOf("?") !== -1 ? "&" : "?";
+                    path += "noCache=" + (new Date().getTime());
+                }
+
+                $.get(path, function(response) {
                     asset.raw = response;
                     asset.readyState = "loaded";
                     asset.emit("loaded");

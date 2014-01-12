@@ -6,6 +6,7 @@ define(function(require) {
     var Asset = modelCapabilities({});
 
     Asset.rootPath = "";
+    Asset.noCache = false;
 
     Asset.createOrFind = function(path) {
         var asset = Asset.find("path", path);
@@ -19,6 +20,7 @@ define(function(require) {
     Asset.on("instance created", function(asset, path) {
         assetLoadingCapabilities(asset);
         asset.rootPath = Asset.rootPath;
+        asset.noCache = Asset.noCache;
         asset.path = path;
         asset.tag("toLoad");
     });
@@ -30,21 +32,21 @@ define(function(require) {
                 asset.tag(tagName);
             }
         });
-    })
+    });
 
     Asset.on("load by tag", function(tagName) {
         loadNextAssetFromCollection(tagName);
     });
 
-    function loadNextAssetFromCollection(tag) {
-        if (Asset.toLoad[tag].length > 0) {
-            var asset = Asset.toLoad[tag][0];
+    function loadNextAssetFromCollection(tagName) {
+        if (Asset.toLoad[tagName].length > 0) {
+            var asset = Asset.toLoad[tagName][0];
             asset.on("loaded", function() {
-                loadNextAssetFromCollection(tag);
+                loadNextAssetFromCollection(tagName);
             });
             asset.emit("load");
         } else {
-            Asset.emit([tag, "loaded"]);
+            Asset.emit(tagName + " loaded");
         }
     }
 

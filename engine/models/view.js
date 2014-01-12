@@ -4,7 +4,10 @@ define(function(require) {
 
     var View = modelCapabilities({});
 
+    var uid = 0;
+
     View.on("instance created", function(view, rendererCapabilities, params) {
+        view.id = params.id || "view_" + (uid + 1);
         rendererCapabilities(view);
         view.emit("initialize", params);
     });
