@@ -9,19 +9,20 @@ define(function(require) {
 
         object.tag = function(tagName, item) {
             var tag = tags[tagName] || createTag(tagName);
-            tag.push(item);
+            if (tag.indexOf(item) !== -1) {
+                tag.push(item);
+            }
 
             return object;
         };
 
         object.untag = function(tagName, item) {
             var tag = tags[tagName] || false;
-            if (!tag) {
-                return object;
-            }
-            var index = tag.indexOf(item);
-            if (index !== -1) {
-                tag.splice(index, 1);
+            if (tag) {
+                var index = tag.indexOf(item);
+                if (index !== -1) {
+                    tag.splice(index, 1);
+                }
             }
 
             return object;
