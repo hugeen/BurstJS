@@ -24,16 +24,15 @@ define(function(require) {
 
         view.on("ready", function() {
             var compiledTemplate = Mustache.render(view.template, view);
-            view.el = $("<div>").html(compiledTemplate).appendTo(view.container);
-            view.stylesheet = $("<style>").html(view.stylesheet).appendTo(view.container);
+            view.container.html(compiledTemplate);
+            view.container.append($("<style>").html(view.stylesheet));
             view.state = "rendered";
             view.emit("rendered");
         });
 
         view.on("clear", function() {
             if (view.state === "rendered") {
-                view.el.remove();
-                view.stylesheet.remove();
+                view.container.html("");
                 view.state = "cleared";
                 view.emit("cleared");
             }
