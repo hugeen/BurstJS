@@ -5,10 +5,31 @@ define(function(require) {
 
     var Asset = modelCapabilities({});
 
+    Asset.createOrFind = function(path) {
+        var asset = Asset.find("path", path);
+        if (asset === null) {
+            asset = Asset.create({
+                path: path
+            });
+        }
+
+        return asset;
+    };
+
+    Asset.loadManifest = function(manifest, tagName) {
+        manifest.forEach(function(assetPath) {
+            var asset = Asset.createOrFind(assetPath);
+            if (typeof tagName !== "undefined") {
+                asset.tag(tagName);
+            }
+        });
+
+        return Asset;
+    };
+
     Asset.on("instance created", function(asset, params) {
         assetLoadingCapabilities(asset);
         asset.url = params.url;
-        asset.name = params.name;
         asset.tag("toLoad");
     });
 
