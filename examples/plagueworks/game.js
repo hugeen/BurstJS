@@ -11,10 +11,20 @@ define(function(require) {
     var game = require("burst/core/event_capabilities")({});
 
     game.on("start", function() {
-        View.create(domCapabilities, {
-            id: "titleScreen",
-            template: "templates/title.mustache",
-            stylesheet: "stylesheets/title.css",
+
+        var layout = View.create(domCapabilities, {
+            id: "layout",
+            template: "templates/layout.html",
+            stylesheets: ["stylesheets/layout.css"],
+            images: []
+        });
+
+        var title = View.create(domCapabilities, {
+            id: "title",
+            template: "templates/title.html",
+            stylesheets: ["stylesheets/title.css"],
+            container: '#plagueworks',
+            parent: layout,
             images: [
                 "images/achievements.png",
                 "images/background.png",
@@ -23,7 +33,13 @@ define(function(require) {
                 "images/highscores.png",
                 "images/main-frame.png"
             ]
-        }).emit("render");
+        });
+
+        layout.on("rendered", function() {
+            title.emit("render");
+        });
+
+        layout.emit("render");
     });
 
     return game;

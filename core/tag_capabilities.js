@@ -1,29 +1,47 @@
 define(function(require) {
 
     var finderCapabilities = require("burst/core/finder_capabilities");
+    var slice = Array.prototype.slice;
 
     return function(object) {
 
         var tags = {};
         var tagNames = [];
 
-        object.tag = function(tagName, item) {
-            var tag = tags[tagName] || createTag(tagName);
-            if (tag.indexOf(item) === -1) {
-                tag.push(item);
-            }
+        object.tag = function() {
+            var args = slice.call(arguments);
+            var item = args.shift();
+
+            args.forEach(function(arg) {
+                var tagNames = Array.isArray(arg) ? arg : [arg];
+                tagNames.forEach(function(tagName) {
+                    var tag = tags[tagName] || createTag(tagName);
+                    if (tag.indexOf(item) === -1) {
+                        tag.push(item);
+                    }
+                });
+            });
 
             return object;
         };
 
-        object.untag = function(tagName, item) {
-            var tag = tags[tagName] || false;
-            if (tag) {
-                var index = tag.indexOf(item);
-                if (index !== -1) {
-                    tag.splice(index, 1);
-                }
-            }
+        object.untag = function() {
+
+            var args = slice.call(arguments);
+            var item = args.shift();
+
+            args.forEach(function(arg) {
+                var tagNames = Array.isArray(arg) ? arg : [arg];
+                tagNames.forEach(function(tagName) {
+                    var tag = tags[tagName] || false;
+                    if (tag) {
+                        var index = tag.indexOf(item);
+                        if (index !== -1) {
+                            tag.splice(index, 1);
+                        }
+                    }
+                });
+            });
 
             return object;
         };

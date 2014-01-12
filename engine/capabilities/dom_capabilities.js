@@ -11,23 +11,31 @@ define(function(require) {
         viewCapabilities(view);
 
         view.on("initialize", function(params) {
-            view.templatePath = params.template;
-            view.stylesheetPath = params.stylesheet;
-            Asset.emit("add manifest", [view.templatePath, view.stylesheetPath], view.id);
+            view.template = Asset.createOrFind(params.template).tag(view.id);
+            Asset.emit("add manifest", params.stylesheets || [], [view.id, "stylesheets"]);
         });
 
         view.on("assets loaded", function() {
-            view.template = Asset.find("path", view.templatePath).raw;
-            view.stylesheet = Asset.find("path", view.stylesheetPath).raw;
+            view.stylesheets = Asset[view.id].stylesheets;
             view.emit("render");
         });
 
         view.on("ready", function() {
-            var compiledTemplate = Mustache.render(view.template, view);
-            view.container.html(compiledTemplate);
-            view.container.append($("<style>").html(view.stylesheet));
-            view.state = "rendered";
+            view.emit("display template");
+            view.emit("apply stylesheets");
             view.emit("rendered");
+            view.state = "rendered";
+        });
+
+        view.on("display template", function() {
+            var compiledTemplate = Mustache.render(view.template.raw, view);
+            view.container.html(compiledTemplate);
+        });
+
+        view.on("apply stylesheets", function() {
+            Asset.stylesheets[view.id].forEach(function(stylesheet) {
+                view.container.append($("<style>").html(stylesheet.raw));
+            });
         });
 
         view.on("clear", function() {

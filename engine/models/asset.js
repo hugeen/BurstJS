@@ -2,6 +2,7 @@ define(function(require) {
 
     var modelCapabilities = require("burst/core/model_capabilities");
     var assetLoadingCapabilities = require("burst/engine/capabilities/asset_loading_capabilities");
+    var slice = Array.prototype.slice;
 
     var Asset = modelCapabilities({});
 
@@ -25,11 +26,13 @@ define(function(require) {
         asset.tag("toLoad");
     });
 
-    Asset.on("add manifest", function(manifest, tagName) {
+    Asset.on("add manifest", function() {
+        var args = slice.call(arguments);
+        var manifest = args.shift();
         manifest.forEach(function(assetPath) {
             var asset = Asset.createOrFind(assetPath);
-            if (typeof tagName !== "undefined") {
-                asset.tag(tagName);
+            if (args.length > 0) {
+                asset.tag.apply(asset, args);
             }
         });
     });

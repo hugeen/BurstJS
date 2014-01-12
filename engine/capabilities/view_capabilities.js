@@ -9,11 +9,21 @@ define(function(require) {
 
         eventCapabilities(view);
 
+        view.children = [];
         view.state = "initialized";
 
+        Object.defineProperty(view, "container", {
+            get: function() {
+                return $(view.selector);
+            }
+        });
+
         view.on("initialize", function(params) {
-            view.container = params.container || $("body");
+            view.selector = params.selector || "body";
             Asset.emit("add manifest", (params.images || []), view.id);
+            if (typeof params.parent !== "undefined") {
+                params.parent.children.push(view);
+            }
         });
 
         view.on("load assets", function() {
@@ -22,6 +32,12 @@ define(function(require) {
                 view.emit("assets loaded");
             });
             Asset.emit("load by tag", view.id);
+        });
+
+        view.on("clear", function() {
+            view.children.forEach(function(child) {
+                child.emit("clear");
+            });
         });
 
         view.on("render", function() {

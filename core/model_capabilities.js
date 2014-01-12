@@ -21,13 +21,13 @@ define(function(require) {
                 }
             });
 
-            instance.tag = function(tagName) {
-                Model.tag(tagName, instance);
+            instance.tag = function() {
+                Model.tag.apply(Model, [instance].concat(slice.call(arguments)));
                 return instance;
             };
 
-            instance.untag = function(tagName) {
-                Model.untag(tagName, instance);
+            instance.untag = function() {
+                Model.untag.apply(Model, [instance].concat(slice.call(arguments)));
                 return instance;
             };
 
