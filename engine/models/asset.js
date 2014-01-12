@@ -5,36 +5,35 @@ define(function(require) {
 
     var Asset = modelCapabilities({});
 
+    Asset.rootPath = "";
+
     Asset.createOrFind = function(path) {
         var asset = Asset.find("path", path);
         if (asset === null) {
-            asset = Asset.create({
-                path: path
-            });
+            asset = Asset.create(path);
         }
 
         return asset;
     };
 
-    Asset.loadManifest = function(manifest, tagName) {
+    Asset.on("instance created", function(asset, path) {
+        assetLoadingCapabilities(asset);
+        asset.rootPath = Asset.rootPath;
+        asset.path = path;
+        asset.tag("toLoad");
+    });
+
+    Asset.on("add manifest", function(manifest, tagName) {
         manifest.forEach(function(assetPath) {
             var asset = Asset.createOrFind(assetPath);
             if (typeof tagName !== "undefined") {
                 asset.tag(tagName);
             }
         });
+    })
 
-        return Asset;
-    };
-
-    Asset.on("instance created", function(asset, params) {
-        assetLoadingCapabilities(asset);
-        asset.url = params.url;
-        asset.tag("toLoad");
-    });
-
-    Asset.on("load by tag", function(tag) {
-        loadNextAssetFromCollection(tag);
+    Asset.on("load by tag", function(tagName) {
+        loadNextAssetFromCollection(tagName);
     });
 
     function loadNextAssetFromCollection(tag) {

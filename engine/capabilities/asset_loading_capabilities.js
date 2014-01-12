@@ -18,7 +18,7 @@ define(function(require) {
                 asset.readyState = "processing";
                 asset.untag("toLoad");
 
-                $.get(asset.path, function(response) {
+                $.get(asset.rootPath + asset.path, function(response) {
                     asset.raw = response;
                     asset.readyState = "loaded";
                     asset.emit("loaded");

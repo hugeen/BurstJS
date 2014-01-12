@@ -5,53 +5,18 @@ define(function(require) {
     var domCapabilities = require("burst/engine/capabilities/dom_capabilities");
     var View = require("burst/engine/models/view");
     var Asset = require("burst/engine/models/asset");
+    Asset.rootPath = "assets/";
 
     game.on("start", function() {
 
-        // Asset.create({
-        //     name: "title.mustache",
-        //     url: "assets/templates/"
-        // }).tag("aaa");
-        // 
-        // Asset.create({
-        //     name: "hello.mustache",
-        //     url: "assets/templates/"
-        // }).tag("main");
-        // 
-        // Asset.create({
-        //     name: "arf.mustache",
-        //     url: "assets/arf/"
-        // }).tag("main");
-        // 
-        // console.log(Asset.main.main.find("url", 'assets/templates/'));
-        // console.log(Asset.where({
-        //     name: "title.mustache",
-        //     url: 'assets/templates/'
-        // }));
+        Asset.emit("add manifest", ["templates/title.mustache", "images/achievements.png", "images/background.png", "images/credits.png", "images/items-frame.png", "images/how-to-play.png", "images/highscores.png", "images/main-frame.png"], "titleScreen");
+        Asset.emit("load by tag", "titleScreen");
+
         // // Views stuff
         // var titleScreen = View.create(domCapabilities, {
         //     template: "hello world",
         //     container: $("#plagueworks")
         // }).emit("render");
-        // Assets stuff
-        // var assets = ["achievements.png", "background.png", "credits.png", "gem-blob.png"];
-        // assets.forEach(function(assetName) {
-        //     Asset.create({
-        //         url: "assets/images/" + assetName
-        //     }).tag("main").tag("hello");
-        // });
-        // ["gem-blood.png"].forEach(function(assetName) {
-        //     Asset.create({
-        //         url: "assets/images/" + assetName
-        //     }).tag("hello");
-        // });
-        // 
-        // Asset.on(["main", "loaded"], function() {
-        //     console.log("main assets loaded");
-        // });
-        // 
-        // Asset.emit("load by tag", "main");
-        // Asset.emit("load by tag", "hello");
     });
 
     return game;

@@ -9,7 +9,7 @@ define(function(require) {
 
         object.tag = function(tagName, item) {
             var tag = tags[tagName] || createTag(tagName);
-            if (tag.indexOf(item) !== -1) {
+            if (tag.indexOf(item) === -1) {
                 tag.push(item);
             }
 
