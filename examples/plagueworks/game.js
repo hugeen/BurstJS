@@ -15,8 +15,14 @@ define(function(require) {
         View.create(domCapabilities, {
             id: "titleScreen",
             template: "templates/title.mustache",
-            images: ["images/achievements.png", "images/background.png", "images/credits.png", "images/how-to-play.png", "images/highscores.png", "images/main-frame.png"],
-            container: $("#plagueworks")
+            images: [
+                "images/achievements.png",
+                "images/background.png",
+                "images/credits.png",
+                "images/how-to-play.png",
+                "images/highscores.png",
+                "images/main-frame.png"
+            ]
         }).emit("render");
     });
 
