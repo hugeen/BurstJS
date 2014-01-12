@@ -37,19 +37,6 @@ define(function(require) {
             return instance;
         };
 
-        Model.alias = function(aliasName, value) {
-            var def = {};
-            def.configurable = true;
-            if (typeof value === "function") {
-                def.get = value;
-            } else {
-                def.value = value;
-            }
-            Object.defineProperty(Model, aliasName, def);
-
-            return Model;
-        };
-
         return Model;
     };
 
