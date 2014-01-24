@@ -15,7 +15,7 @@ define(function(require) {
             args.forEach(function(arg) {
                 var tagNames = Array.isArray(arg) ? arg : [arg];
                 tagNames.forEach(function(tagName) {
-                    var tag = tags[tagName] || createTag(tagName);
+                    var tag = object.getTag(tagName);
                     if (tag.indexOf(item) === -1) {
                         tag.push(item);
                     }
@@ -54,19 +54,26 @@ define(function(require) {
             return object;
         };
 
-        function createTag(tagName) {
-            tagNames.push(tagName);
-            tags[tagName] = Object.create(Array.prototype);
-            finderCapabilities(tags[tagName]);
-            Object.defineProperty(object, tagName, {
-                get: function() {
-                    return tagCascade(tags[tagName]);
-                },
-                configurable: true
-            });
+        object.getTag = function(tagName) {
+            return tags[tagName] || object.addTag(tagName);
+        };
+
+        object.addTag = function(tagName) {
+            if(typeof tags[tagName] === "undefined") {
+                tagNames.push(tagName);
+                tags[tagName] = Object.create(Array.prototype);
+                finderCapabilities(tags[tagName]);
+                Object.defineProperty(object, tagName, {
+                    get: function() {
+                        return tagCascade(tags[tagName]);
+                    },
+                    configurable: true
+                });
+            }
 
             return tags[tagName];
-        }
+        };
+
 
         function tagCascade(parentTag) {
             tagNames.forEach(function(tagName) {
