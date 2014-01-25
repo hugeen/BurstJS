@@ -10,33 +10,20 @@ Event-Driven HTML5 Game Framework
 * Using the latest **HTML5** technologies, such as *WebGL*, *WebWorkers*, *WebSockets*
 * *Open-Source*, *Modular* and *Hackable*
 
-Here we go! Tell me who are you, why are you here?
+## Core Features
 
-* [I would like to learn programming by doing my first video game](#build-your-first-game)
-* [I am a developer and I want a serious alternative to existing games engines](#the-burstjs-approach-compared-to-other-game-engines)
-* [I'm just curious](#you-should-try-it)
+* Models
+* Events
+* Collections
+* Tags
+* Finders
 
-### Build your first game
-
-* Walkthrough - Coming soon.
-* [Core documentation](https://github.com/hugeen/BurstJS/wiki/Core-documentation)
-
-### The BurstJS approach compared to other game engines
-
-Coming soon.
-
-### You should try it!
-
-Coming soon.
-
-
-## Features
-
-* [**MEC**](https://github.com/hugeen/BurstJS/wiki/The-MEC-Pattern) based core
-* GameLoop
+[Core documentation](https://github.com/hugeen/BurstJS/wiki/Core-documentation)
 
 ### Upcoming
 
+* HTML5 Game Framework Architecture
+* GameLoop
 * WebGL renderer
 * Views
 * Inputs (Mouse, Keyboard, Touch, Gamepad)
@@ -53,10 +40,7 @@ Coming soon.
 
 ## Dependencies
 
-* [RequireJS](http://requirejs.org/) Modular architecture
-* [Zepto](http://zeptojs.com/) DOM utils
-* [Mustache](https://github.com/janl/mustache.js/) Templating system
-
+* [RequireJS](http://requirejs.org/)
 
 ## Credits
 
