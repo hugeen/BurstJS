@@ -20,9 +20,6 @@ define(function(require) {
     game.on("start", function() {
         benchmark("Model Creation", function(i) {
             var p = Player.create().tag("global");
-            p.on("hi", function() {
-                console.log(i);
-            });
             if ( !! (i % 2)) {
                 p.tag("hello");
             }
@@ -30,9 +27,9 @@ define(function(require) {
 
         benchmark("Get Collection", function() {
             var p = Player.global.hello;
-        }, 1);
+        }, 10);
 
-        Player.hello.broadcast("hi");
+        // Player.hello.broadcast("hi");
     });
 
     return game;

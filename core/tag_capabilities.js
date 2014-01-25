@@ -82,9 +82,13 @@ define(function(require) {
                 Object.defineProperty(parentTag, tagName, {
                     get: function() {
                         var filtered = Object.create(Array.prototype);
-                        tags[tagName].forEach(function(item) {
-                            if (parentTag.indexOf(item) !== -1) {
-                                filtered.push(item);
+                        var tag = tags[tagName];
+                        parentTag.forEach(function(item) {
+                            for(var i = 0; i < tag.length; i++) {
+                                if(tag[i] === item) {
+                                    filtered.push(item);
+                                    break;
+                                }
                             }
                         });
                         finderCapabilities(filtered);
