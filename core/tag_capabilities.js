@@ -11,7 +11,6 @@ define(function(require) {
         object.tag = function() {
             var args = slice.call(arguments);
             var item = args.shift();
-
             args.forEach(function(arg) {
                 var tagNames = Array.isArray(arg) ? arg : [arg];
                 tagNames.forEach(function(tagName) {
@@ -55,25 +54,28 @@ define(function(require) {
         };
 
         object.getTag = function(tagName) {
-            return tags[tagName] || object.addTag(tagName);
+            object.addTag(tagName);
+
+            return tags[tagName];
         };
 
         object.addTag = function(tagName) {
-            if(typeof tags[tagName] === "undefined") {
+            if (typeof tags[tagName] === "undefined") {
                 tagNames.push(tagName);
-                tags[tagName] = Object.create(Array.prototype);
-                finderCapabilities(tags[tagName]);
+                var tag = Object.create(Array.prototype);
+                tags[tagName] = tag;
+                finderCapabilities(tag);
+                tagBroadcastCapabilities(tag);
                 Object.defineProperty(object, tagName, {
                     get: function() {
-                        return tagCascade(tags[tagName]);
+                        return tagCascade(tag);
                     },
                     configurable: true
                 });
             }
 
-            return tags[tagName];
+            return this;
         };
-
 
         function tagCascade(parentTag) {
             tagNames.forEach(function(tagName) {
@@ -86,6 +88,7 @@ define(function(require) {
                             }
                         });
                         finderCapabilities(filtered);
+                        tagBroadcastCapabilities(filtered);
                         return tagCascade(filtered);
                     },
                     configurable: true
@@ -94,6 +97,15 @@ define(function(require) {
 
             return parentTag;
         }
+
+        function tagBroadcastCapabilities(tag) {
+            tag.broadcast = function() {
+                var args = slice.call(arguments);
+                tag.forEach(function(item) {
+                    item.emit.apply(item, args);
+                });
+            };
+        };
 
         return object;
     };

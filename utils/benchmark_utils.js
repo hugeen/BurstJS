@@ -7,11 +7,11 @@ define(function() {
 
         for (var i = 0; i < count; i++) {
             var startedAt = Date.now();
-            fnc();
+            fnc(i);
             total += Date.now() - startedAt;
         }
 
-        console.log("[Benchmark] " + name, "x" + count + ": ", total+"ms", "- Average: ", "~" + total / count + "ms");
+        console.log("[Benchmark] " + name, "x" + count + ": ", total + "ms", "- Average: ", "~" + total / count + "ms");
     };
 
 });

@@ -33,7 +33,7 @@ define(function(require) {
 
             Model.add(instance);
 
-            Model.emit.apply(Model, ["instance created", instance].concat(slice.call(arguments)));
+            Model.emit.apply(Model, ["create", instance].concat(slice.call(arguments)));
 
             return instance;
         };
