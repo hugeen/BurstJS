@@ -79,27 +79,36 @@ define(function(require) {
 
         function tagCascade(parentTag) {
             tagNames.forEach(function(tagName) {
-                Object.defineProperty(parentTag, tagName, {
-                    get: function() {
-                        var filtered = Object.create(Array.prototype);
-                        var tag = tags[tagName];
-                        parentTag.forEach(function(item) {
-                            for(var i = 0; i < tag.length; i++) {
-                                if(tag[i] === item) {
-                                    filtered.push(item);
-                                    break;
-                                }
-                            }
-                        });
-                        finderCapabilities(filtered);
-                        tagBroadcastCapabilities(filtered);
-                        return tagCascade(filtered);
-                    },
-                    configurable: true
-                });
+                defineFilteredTag(parentTag, tagName);
             });
 
             return parentTag;
+        }
+
+        function defineFilteredTag(parentTag, tagName) {
+            Object.defineProperty(parentTag, tagName, {
+                get: function() {
+                    var filteredTag = filterTag(parentTag, tags[tagName]);
+                    finderCapabilities(filteredTag);
+                    tagBroadcastCapabilities(filteredTag);
+                    return tagCascade(filteredTag);
+                },
+                configurable: true
+            });
+        }
+
+        function filterTag(parentTag, tag) {
+            var filtered = Object.create(Array.prototype);
+            parentTag.forEach(function(item) {
+                for (var i = 0; i < tag.length; i++) {
+                    if (tag[i] === item) {
+                        filtered.push(item);
+                        break;
+                    }
+                }
+            });
+
+            return filtered;
         }
 
         function tagBroadcastCapabilities(tag) {
