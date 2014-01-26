@@ -1,6 +1,6 @@
 define(function(require) {
 
-    var $ = require("burst/libs/zepto");
+    var $ = require("burst/libs/jquery");
     var domCapabilities = require("burst/engine/capabilities/dom_capabilities");
 
     var View = require("burst/engine/models/view");

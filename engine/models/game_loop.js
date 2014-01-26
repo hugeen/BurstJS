@@ -5,11 +5,11 @@ define(function(require) {
 
     var GameLoop = modelCapabilities({});
 
-    GameLoop.on("instance created", function(gameLoop) {
+    GameLoop.on("create", function(gameLoop) {
         gameLoopCapabilities(gameLoop);
     });
 
-    GameLoop.on("instance destroyed", function(gameLoop) {
+    GameLoop.on("destroy", function(gameLoop) {
         gameLoop.emit("stop");
     });
 

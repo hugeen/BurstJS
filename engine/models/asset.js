@@ -5,6 +5,7 @@ define(function(require) {
     var slice = Array.prototype.slice;
 
     var Asset = modelCapabilities({});
+    Asset.addTag("toLoad");
 
     Asset.rootPath = "";
     Asset.noCache = false;
@@ -18,7 +19,7 @@ define(function(require) {
         return asset;
     };
 
-    Asset.on("instance created", function(asset, path) {
+    Asset.on("create", function(asset, path) {
         assetLoadingCapabilities(asset);
         asset.rootPath = Asset.rootPath;
         asset.noCache = Asset.noCache;

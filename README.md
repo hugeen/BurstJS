@@ -54,7 +54,7 @@ Coming soon.
 ## Dependencies
 
 * [RequireJS](http://requirejs.org/) Modular architecture
-* [Zepto](http://zeptojs.com/) DOM utils
+* [jQuery](http://zeptojs.com/) DOM utils
 * [Mustache](https://github.com/janl/mustache.js/) Templating system
 
 
