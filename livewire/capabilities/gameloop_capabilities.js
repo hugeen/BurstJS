@@ -1,6 +1,6 @@
 define(function(require) {
 
-    var eventCapabilities = require("burst/core/event_capabilities");
+    var eventCapabilities = require("burstcore/event_capabilities");
 
     return function(gameLoop) {
 

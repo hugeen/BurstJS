@@ -1,7 +1,7 @@
 define(function(require) {
 
-    var modelCapabilities = require("burst/core/model_capabilities");
-    var assetLoadingCapabilities = require("burst/engine/capabilities/asset_loading_capabilities");
+    var modelCapabilities = require("burstcore/model_capabilities");
+    var assetLoadingCapabilities = require("livewire/capabilities/assets_loading_capabilities");
     var slice = Array.prototype.slice;
 
     var Asset = modelCapabilities({});

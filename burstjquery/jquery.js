@@ -1,5 +1,5 @@
 define(function(require) {
 
-    return require("burst/libs/jquery/jquery");
+    return require("burstjquery/jquery");
 
 });

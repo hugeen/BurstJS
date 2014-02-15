@@ -1,10 +1,10 @@
 define(function(require) {
 
-    var $ = require("burst/libs/jquery");
-    var Mustache = require("burst/libs/mustache");
+    var $ = require("burstjquery");
+    var Mustache = require("burstutils/mustache");
 
-    var viewCapabilities = require("burst/engine/capabilities/view_capabilities");
-    var Asset = require("burst/engine/models/asset");
+    var viewCapabilities = require("livewire/capabilities/view_capabilities");
+    var Asset = require("livewire/models/asset");
 
     return function(view) {
 

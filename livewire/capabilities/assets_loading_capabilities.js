@@ -1,7 +1,7 @@
 define(function(require) {
 
-    var eventCapabilities = require("burst/core/event_capabilities");
-    var $ = require("burst/libs/jquery");
+    var eventCapabilities = require("burstcore/event_capabilities");
+    var $ = require("burstjquery");
 
     return function(asset) {
 

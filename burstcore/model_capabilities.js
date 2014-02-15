@@ -1,7 +1,7 @@
 define(function(require) {
 
-    var eventCapabilities = require("burst/core/event_capabilities");
-    var collectionCapabilities = require("burst/core/collection_capabilities");
+    var eventCapabilities = require("burstcore/event_capabilities");
+    var collectionCapabilities = require("burstcore/collection_capabilities");
     var slice = Array.prototype.slice;
 
     return function(Model) {

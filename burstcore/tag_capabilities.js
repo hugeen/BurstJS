@@ -1,6 +1,6 @@
 define(function(require) {
 
-    var finderCapabilities = require("burst/core/finder_capabilities");
+    var finderCapabilities = require("burstcore/finder_capabilities");
     var slice = Array.prototype.slice;
 
     return function(object) {

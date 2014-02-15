@@ -1,9 +1,9 @@
 define(function(require) {
 
-    var $ = require("burst/libs/jquery");
+    var $ = require("burstjquery");
 
-    var eventCapabilities = require("burst/core/event_capabilities");
-    var Asset = require("burst/engine/models/asset");
+    var eventCapabilities = require("burstcore/event_capabilities");
+    var Asset = require("livewire/models/asset");
 
     return function(view) {
 

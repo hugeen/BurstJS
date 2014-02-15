@@ -1,7 +1,7 @@
 define(function(require) {
 
-    var finderCapabilities = require("burst/core/finder_capabilities");
-    var tagCapabilities = require("burst/core/tag_capabilities");
+    var finderCapabilities = require("burstcore/finder_capabilities");
+    var tagCapabilities = require("burstcore/tag_capabilities");
     var slice = Array.prototype.slice;
 
     return function(collection) {

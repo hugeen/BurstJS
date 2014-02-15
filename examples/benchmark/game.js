@@ -2,7 +2,7 @@ define(function(require) {
 
     var eventCapabilities = require("burstcore/event_capabilities");
     var modelCapabilities = require("burstcore/model_capabilities");
-    var benchmark = require("burst/utils/benchmark_utils");
+    var benchmark = require("burstutils/benchmark_utils");
 
     var game = eventCapabilities({});
 
@@ -36,7 +36,7 @@ define(function(require) {
             Player.burst.hello;
         }, 750);
 
-        console.log(Player.global.hello.length)
+        console.log(Player.global.hello.length);
 
     });
 

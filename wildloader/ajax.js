@@ -1,7 +1,7 @@
 define(function(require) {
 
-    var modelCapabilities = require("burst_core/model_capabilities");
-    var ajaxCapabilities = require("wild_loader/ajax_capabilities");
+    var modelCapabilities = require("burstcore/model_capabilities");
+    var ajaxCapabilities = require("wildloader/ajax_capabilities");
 
     var Ajax = eventCapabilities({});
     Ajax.on("create", function(ajax, type, url, params) {

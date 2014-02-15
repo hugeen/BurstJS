@@ -1,6 +1,6 @@
 define(function(require) {
 
-    var modelCapabilities = require("burst/core/model_capabilities");
+    var modelCapabilities = require("burstcore/model_capabilities");
 
     var View = modelCapabilities({});
     var uid = 0;

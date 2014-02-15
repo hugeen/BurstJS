@@ -1,14 +1,14 @@
 define(function(require) {
 
-    var $ = require("burst/libs/jquery");
-    var domCapabilities = require("burst/engine/capabilities/dom_capabilities");
+    var $ = require("burstjquery");
+    var domCapabilities = require("livewire/capabilities/dom_capabilities");
 
-    var View = require("burst/engine/models/view");
-    var Asset = require("burst/engine/models/asset");
+    var View = require("livewire/models/view");
+    var Asset = require("livewire/models/asset");
     Asset.rootPath = "assets/";
     Asset.noCache = true;
 
-    var game = require("burst/core/event_capabilities")({});
+    var game = require("burstcore/event_capabilities")({});
 
     game.on("start", function() {
 
