@@ -23,7 +23,7 @@ define(function(require) {
             id: "title",
             template: "templates/title.html",
             stylesheets: ["stylesheets/title.css"],
-            container: '#plagueworks',
+            selector: '#plagueworks',
             parent: layout,
             images: [
                 "images/achievements.png",

@@ -12,7 +12,7 @@ define(function(require) {
 
         view.on("initialize", function(params) {
             view.template = Asset.createOrFind(params.template).tag(view.id);
-            Asset.emit("add manifest", params.stylesheets || [], [view.id, "stylesheets"]);
+            // Asset.emit("add manifest", params.stylesheets || [], [view.id, "stylesheets"]);
         });
 
         view.on("assets loaded", function() {
@@ -21,8 +21,8 @@ define(function(require) {
         });
 
         view.on("ready", function() {
-            view.emit("display template");
-            view.emit("apply stylesheets");
+            // view.emit("display template");
+            // view.emit("apply stylesheets");
             view.emit("rendered");
             view.state = "rendered";
         });

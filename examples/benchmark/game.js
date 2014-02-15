@@ -1,7 +1,7 @@
 define(function(require) {
 
-    var eventCapabilities = require("burst/core/event_capabilities");
-    var modelCapabilities = require("burst/core/model_capabilities");
+    var eventCapabilities = require("burstcore/event_capabilities");
+    var modelCapabilities = require("burstcore/model_capabilities");
     var benchmark = require("burst/utils/benchmark_utils");
 
     var game = eventCapabilities({});

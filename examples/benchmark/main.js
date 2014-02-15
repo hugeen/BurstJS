@@ -1,6 +1,6 @@
 requirejs.config({
     paths: {
-        burst: '../../'
+        burstcore: '../../burstcore'
     },
     urlArgs: "bust=" + (new Date()).getTime()
 });
