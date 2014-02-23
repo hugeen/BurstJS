@@ -35,7 +35,7 @@ define(function(require) {
                         reader.addEventListener('load', function(e) {
                             // change location to Data URI
                             // location.href = e.target.result;
-                            console.log(e.target.result)
+                            console.log(e.target.result);
                             asset.raw = xhr.response;
                             asset.readyState = "loaded";
                             asset.emit("loaded");
@@ -47,8 +47,7 @@ define(function(require) {
                             'type': xhr.getResponseHeader('Content-Type')
                         });
                         // read blob as Data URI
-                        
-                        if(xhr.getResponseHeader('Content-Type') === "text/css") {
+                        if (xhr.getResponseHeader('Content-Type') === "text/css") {
                             asset.raw = xhr.response;
                             asset.readyState = "loaded";
                             asset.emit("loaded");
@@ -59,29 +58,6 @@ define(function(require) {
                 });
                 xhr.send();
 
-                // $.get(path, function(response, state, request) {
-                // 
-                //     var type = request.getResponseHeader("Content-Type");
-                //     if (type === 'image/png') {
-                //         var reader = new FileReader();
-                //         reader.addEventListener('load', function(e) {
-                //             console.log(e.target.result, e)
-                //             $('#assets').append("<img src='"+e.target.result+"'>");
-                //         });
-                //         
-                //         var blob = new Blob([response], {
-                //             type: 'image/png'
-                //         });
-                //         
-                //         reader.readAsDataURL(blob);
-                //         var url = URL.createObjectURL(blob);
-                //         
-                //     }
-                // 
-                    // asset.raw = response;
-                    // asset.readyState = "loaded";
-                    // asset.emit("loaded");
-                // });
             }
         });
 
