@@ -7,3 +7,7 @@ gulp.task('browserify', function() {
         debug: true
     }).pipe(source('burst.js')).pipe(gulp.dest('./build/'));
 });
+
+gulp.task('watch', function() {
+    gulp.watch('*.js', ['browserify']);
+});

@@ -1,0 +1,37 @@
+{
+    "name": "burstjs",
+    "description": "Ultra Modular HTML5 Game Framework",
+    "version": "0.0.2",
+    "homepage": "http://www.burstjs.com/",
+    "author": {
+        "name": "Cyrille Bogaert",
+        "email": "bogaert.cyrille@gmail.com"
+    },
+    "engines": {
+        "node": ">= 0.10.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/hugeen/BurstJS.git"
+    },
+    "bugs": {
+        "url": "https://github.com/hugeen/BurstJS/issues"
+    },
+    "licenses": [{
+        "type": "GPL",
+        "url": "https://github.com/hugeen/BurstJS/blob/master/LICENSE"
+    }],
+    "main": "burst",
+    "scripts": {
+        "test": "gulp test"
+    },
+    "dependencies": {
+        "liftoff": "~0.9.0"
+    },
+    "devDependencies": {}
+    "keywords": ["BurstJS", "Game", "Engine", "HTML5", "Event-Driven", "CLI"],
+    "preferGlobal": "true",
+    "bin": {
+        "burst": "./bin/burst.js"
+    }
+}
