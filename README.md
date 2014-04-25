@@ -1,24 +1,15 @@
-# BurstJS
+# BurstJS (Early Alpha)
 
 Event-Driven HTML5 Game Framework
 
 ## BurstJS is:
 
+* A Rails-Like CLI
 * Still in *draft* form
 * Only compatible on modern browsers (*IE10+*, *Webkit*, ...)
 * Designed with an *innovative* approach: [The **MEC** Pattern](https://github.com/hugeen/BurstJS/wiki/The-MEC-Pattern) (*Models/Events/Capabilities*)
 * Using the latest **HTML5** technologies, such as *WebGL*, *WebWorkers*, *WebSockets*
 * *Open-Source*, *Modular* and *Hackable*
-
-## Core Features
-
-* Models
-* Events
-* Collections
-* Tags
-* Finders
-
-[Core documentation](https://github.com/hugeen/BurstJS/wiki/Core-documentation)
 
 ### Upcoming
 
@@ -37,10 +28,6 @@ Event-Driven HTML5 Game Framework
 * UI editor
 * Map editor
 * Spritesheet editor
-
-## Dependencies
-
-* [RequireJS](http://requirejs.org/)
 
 ## Credits
 
