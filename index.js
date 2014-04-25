@@ -1,26 +1,32 @@
-var sparks = [];
+var sys = require('sys');
+var exec = require('child_process').exec;
+var fs = require('fs');
 
-function addSpark(spark) {
-    sparks.push(spark);
+var sparksDir = "sparks/";
+
+function createSparksDir() {
+    if (!fs.existsSync(sparksDir)) {
+        fs.mkdirSync(sparksDir);
+    }
 }
 
-function installSpark(spark) {
-
+function installSpark(sparkName) {
+    if (!sparkExists(sparkName)) {
+        exec("git clone git@github.com:hugeen/burst-moltencore.git " + sparksDir + sparkName, puts);
+    }
 }
 
-function installAll() {
-    sparks.forEach(function(spark) {
-        installSpark(spark);
-    });
+function sparkExists(sparkName) {
+    return fs.existsSync(sparksDir + sparkName);
+}
+
+function puts(error, stdout, stderr) {
+    sys.puts(stdout);
 }
 
 module.exports = {
     install: function() {
-        if (arguments.length === 0) {
-            installAll();
-        } else {
-            installSpark(arguments[0]);
-        }
-    },
-    spark: addSpark
+        createSparksDir();
+        installSpark("moltencore");
+    }
 };

@@ -40,6 +40,4 @@ function launcher(env) {
         console.log('No Burstfile found.');
     }
 
-    var burst = require(env.modulePath);
-
 }
