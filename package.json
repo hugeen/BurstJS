@@ -1,7 +1,7 @@
 {
   "name": "burstjs",
   "description": "Ultra Modular HTML5 Game Framework",
-  "version": "0.0.2",
+  "version": "0.2.0",
   "homepage": "http://www.burstjs.com/",
   "author": {
     "name": "Cyrille Bogaert",
