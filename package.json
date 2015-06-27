@@ -9,15 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/hugeen/BurstJS.git"
+    "url": "git://github.com/hugeen/burst.git"
   },
   "bugs": {
-    "url": "https://github.com/hugeen/BurstJS/issues"
+    "url": "https://github.com/hugeen/burst/issues"
   },
   "licenses": [
     {
-      "type": "GPL",
-      "url": "https://github.com/hugeen/BurstJS/blob/master/LICENSE"
+      "type": "GPL"
     }
   ],
   "main": "index.js",
